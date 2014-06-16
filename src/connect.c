@@ -17,6 +17,7 @@ static struct addrinfo* first_host;
 static struct addrinfo* host;
 static int port;
 static char* app = NULL;
+static char* instance = NULL;
 
 void forza__reconnect(forza_connect_cb connect_cb);
 void forza__on_connect(uv_connect_t* req, int status);
@@ -64,7 +65,7 @@ void forza__reconnect(forza_connect_cb connect_cb) {
   }
 }
 
-void forza_connect(char* host_, int port_, char* hostname_, char* app_, forza_connect_cb connect_cb) {
+void forza_connect(char* host_, int port_, char* hostname_, char* app_, char* instance_, forza_connect_cb connect_cb) {
   struct addrinfo hints;
   struct addrinfo* t;
   int r, count, random;
@@ -72,8 +73,9 @@ void forza_connect(char* host_, int port_, char* hostname_, char* app_, forza_co
 
   loop = uv_default_loop();
 
-  /* set app name to be used in metric if it exists */
+  /* set app name and instance name to be used in metric if it exists */
   app = app_;
+  instance = instance_;
   /* Get the hostname so that it can be provided to the server */
   hostname = hostname_;
   port = port_;
@@ -161,6 +163,7 @@ forza_metric_t* forza_new_metric() {
 
   metric->meta->uptime = (long long int) - 1;
   metric->meta->port = (unsigned short) - 1;
+  metric->instance = instance;
   metric->app = app;
 
   return metric;

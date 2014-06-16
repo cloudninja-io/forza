@@ -189,6 +189,7 @@ int main(int argc, char *argv[]) {
   char* host;
   char* hostname;
   char* app;
+  char* instance;
   char* port_str;
   int port;
   int i, c, v = 0;
@@ -223,6 +224,7 @@ int main(int argc, char *argv[]) {
   port_str = saneopt_get(opt, "port");
   hostname = saneopt_get(opt, "hostname");
   app = saneopt_get(opt, "app");
+  instance = saneopt_get(opt, "instance");
   arguments = saneopt_arguments(opt);
 
   if (host == NULL || port_str == NULL) {
@@ -254,7 +256,7 @@ int main(int argc, char *argv[]) {
     uv_free_interface_addresses(addresses, c);
   }
 
-  forza_connect(host, port, hostname, app, on_connect);
+  forza_connect(host, port, hostname, app, instance, on_connect);
 
   uv_run(loop, UV_RUN_DEFAULT);
 

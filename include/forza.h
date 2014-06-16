@@ -33,6 +33,7 @@ struct forza_metric {
   time_t time;
   char* host;
   char* app;
+  char* instance;
   char* service;
   char* description;
   forza_metric_meta_t* meta;
@@ -45,7 +46,7 @@ enum forza__stdio_type {
 } typedef forza__stdio_type_t;
 
 
-void forza_connect(char* host, int port, char* hostname, char* app, forza_connect_cb connect_cb_);
+void forza_connect(char* host, int port, char* hostname, char* app, char* instance, forza_connect_cb connect_cb_);
 void forza_send(forza_metric_t* metric);
 void forza_close();
 forza_metric_t* forza_new_metric();

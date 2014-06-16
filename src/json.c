@@ -149,6 +149,12 @@ char* forza_json_stringify(forza_metric_t* metric) {
     free(str_buf);
   }
 
+  if (metric->instance) {
+    str_buf = forza__json_stringify_string(metric->instance);
+    forza__json_append(&json, "instance", str_buf, 1);
+    free(str_buf);
+  }
+
   if (metric->service) {
     str_buf = forza__json_stringify_string(metric->service);
     forza__json_append(&json, "service", str_buf, 1);
