@@ -161,7 +161,7 @@ forza_metric_t* forza_new_metric() {
 
   metric->meta->uptime = (long long int) - 1;
   metric->meta->port = (unsigned short) - 1;
-  metric->meta->app = app;
+  metric->app = app;
 
   return metric;
 }

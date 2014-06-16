@@ -97,7 +97,6 @@ char* forza__json_stringify_string(char* string) {
 char* forza__json_stringify_meta(forza_metric_meta_t* meta) {
   char* json = malloc(2);
   char buf[128];
-  char* str_buf;
   int first = 0;
 
   json[0] = '{';
@@ -111,12 +110,6 @@ char* forza__json_stringify_meta(forza_metric_meta_t* meta) {
   if (meta->port != ((unsigned short) - 1)) {
     snprintf(buf, sizeof(buf), "%hu", meta->port);
     forza__json_append(&json, "port", buf, first++);
-  }
-
-  if (meta->app != NULL) {
-    str_buf = forza__json_stringify_string(meta->app);
-    forza__json_append(&json, "app", str_buf, first++);
-    free(str_buf);
   }
 
   json = realloc(json, strlen(json) + 2);
@@ -147,6 +140,12 @@ char* forza_json_stringify(forza_metric_t* metric) {
   if (metric->description) {
     str_buf = forza__json_stringify_string(metric->description);
     forza__json_append(&json, "description", str_buf, 1);
+    free(str_buf);
+  }
+
+  if (metric->app != NULL) {
+    str_buf = forza__json_stringify_string(metric->app);
+    forza__json_append(&json, "app", str_buf, 1);
     free(str_buf);
   }
 

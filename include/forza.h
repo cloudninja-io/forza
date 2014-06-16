@@ -25,15 +25,15 @@ struct forza_metric_meta {
   int pid;
   long long uptime;
   unsigned short port;
-  char* app;
 } typedef forza_metric_meta_t;
 
 struct forza_metric {
   double metric;
   int ttl;
   time_t time;
-  char* service;
   char* host;
+  char* app;
+  char* service;
   char* description;
   forza_metric_meta_t* meta;
 } typedef forza_metric_t;
