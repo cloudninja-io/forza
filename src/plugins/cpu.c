@@ -23,7 +23,7 @@ void cpu__send_usage(uv_timer_t *timer, int status) {
   uv_loadavg(loadinfo);
 #endif
 
-  metric->service = "health/machine/cpu";
+  metric->service = "health.machine/cpu";
   metric->metric = loadinfo[0];
   forza_send(metric);
 

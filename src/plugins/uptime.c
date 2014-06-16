@@ -42,7 +42,7 @@ void uptime__send_uptime(uv_timer_t *timer, int status) {
 
   for (i = 0; i < port_count; i++) {
     metric = forza_new_metric();
-    metric->service = "health/process/uptime";
+    metric->service = "health.process/uptime";
     metric->metric = (double) (now - start_time);
     metric->meta->port = ports[i];
     forza_send(metric);

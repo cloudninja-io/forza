@@ -14,7 +14,7 @@ void mem__send_usage(uv_timer_t *timer, int status) {
   mempct = (double)(totalmem - freemem) / (double)totalmem;
 
   forza_metric_t* metric = forza_new_metric();
-  metric->service = "health/machine/memory";
+  metric->service = "health.machine/memory";
   metric->metric = mempct;
   forza_send(metric);
   forza_free_metric(metric);
