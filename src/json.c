@@ -143,7 +143,7 @@ char* forza_json_stringify(forza_metric_t* metric) {
     free(str_buf);
   }
 
-  if (metric->app != NULL) {
+  if (metric->app) {
     str_buf = forza__json_stringify_string(metric->app);
     forza__json_append(&json, "app", str_buf, 1);
     free(str_buf);
